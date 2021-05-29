@@ -61,9 +61,9 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     onPageChange: () => {
       const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser) {
-        history.push('/leetcode-trackers');
-      }
+      // if (!initialState?.currentUser) {
+      //   history.push('/leetcode-trackers');
+      // }
     },
     links: isDev
       ? [
