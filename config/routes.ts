@@ -43,6 +43,15 @@
     component: './TableList',
   },
   {
+    path: '/leetcode-trackers',
+    name: 'leetcode',
+    icon: 'crown',
+    component: "./LeetCode",
+
+  },
+
+
+  {
     path: '/',
     redirect: '/welcome',
   },
