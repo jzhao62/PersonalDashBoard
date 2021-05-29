@@ -6,7 +6,7 @@ const Settings: LayoutSettings & {
 } = {
   navTheme: 'dark',
   // 拂晓蓝
-  primaryColor: '#6019e2',
+  primaryColor: '#39dff5',
   layout: 'mix',
   contentWidth: 'Fluid',
   fixedHeader: false,
