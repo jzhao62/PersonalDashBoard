@@ -25,27 +25,31 @@ export async function getInitialState(): Promise<{
   fetchUserInfo?: () => Promise<API.CurrentUser | undefined>;
 }> {
   const fetchUserInfo = async () => {
-    try {
-      const currentUser = await queryCurrentUser();
-      return currentUser;
-    } catch (error) {
-      history.push('/user/login');
-    }
-    return undefined;
-  };
-  // 如果是登录页面，不执行
-  if (history.location.pathname !== '/user/login') {
-    const currentUser = await fetchUserInfo();
-    return {
-      fetchUserInfo,
-      currentUser,
-      settings: {},
-    };
+  //   try {
+  //     const currentUser = await queryCurrentUser();
+  //     return currentUser;
+  //   } catch (error) {
+  //     history.push('/welcome');
+  //   }
+  //   return undefined;
+  // };
+  // // 如果是登录页面，不执行
+  // if (history.location.pathname !== '/user/login') {
+  //   const currentUser = await fetchUserInfo();
+  //   return {
+  //     fetchUserInfo,
+  //     currentUser,
+  //     settings: {},
+  //   };
+  // }
+  // return {
+  //   fetchUserInfo,
+  //   settings: {},
+  // };
+
+    return undefined
   }
-  return {
-    fetchUserInfo,
-    settings: {},
-  };
+
 }
 
 // https://umijs.org/zh-CN/plugins/plugin-layout
@@ -57,8 +61,8 @@ export const layout: RunTimeLayoutConfig = ({ initialState }) => {
     onPageChange: () => {
       const { location } = history;
       // 如果没有登录，重定向到 login
-      if (!initialState?.currentUser && location.pathname !== '/user/login') {
-        history.push('/user/login');
+      if (!initialState?.currentUser) {
+        history.push('/leetcode-trackers');
       }
     },
     links: isDev
