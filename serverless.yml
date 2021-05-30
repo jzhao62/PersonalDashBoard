@@ -7,6 +7,6 @@ inputs:
   src:
     src: ./
     hook: npm install ; npm run build:production
-    dist: build
+    dist: dist
   # Enable this when you want to set a custom domain.
   # domain: ${env:domain}
