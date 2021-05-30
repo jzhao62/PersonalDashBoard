@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
 import { Button, Drawer, Space, Table, Tag } from 'antd';
 import QuestionForm from '@/pages/LeetCode/QuestionForm';
+import { useRequest } from '@@/plugin-request/request';
+import { getAllQuestions } from '@/services/leetcode/leetcode';
 
 const columns = [
   {
@@ -79,6 +81,10 @@ const data = [
 
 const LeetCodeList: React.FC = () => {
   const [isDrawerVisible, setIsDrawerVisible] = useState(false);
+
+  const { data: leetcodes, error, loading } = useRequest(getAllQuestions);
+
+  console.log(leetcodes, error, loading);
 
   return (
     <PageContainer

@@ -2,10 +2,6 @@ import type { ReactElement } from 'react';
 import { Button, Form, Input, Select } from 'antd';
 
 const { Option } = Select;
-interface IProp {
-  title?: string;
-  description?: string;
-}
 
 const layout = {
   labelCol: { span: 4 },
@@ -15,9 +11,13 @@ const tailLayout = {
   wrapperCol: { offset: 4, span: 16 },
 };
 
-const OPTIONS = ['t1', 't2', 't3'];
+interface IProp {
+  leetcodeQuestion?: LeetCode.question;
+}
 
-const QuestionForm = ({ title, description }: IProp): ReactElement => {
+const OPTIONS: string[] = [];
+
+const QuestionForm = ({ leetcodeQuestion = undefined }: IProp): ReactElement => {
   const onFinish = (values: any) => {
     console.log('Success:', values);
   };
@@ -30,7 +30,12 @@ const QuestionForm = ({ title, description }: IProp): ReactElement => {
     <Form
       {...layout}
       name="basic"
-      initialValues={{ title, tags: ['t1', 't2', 't3'], description }}
+      initialValues={{
+        title: leetcodeQuestion?.title,
+        tags: leetcodeQuestion?.tags,
+        description: leetcodeQuestion?.description,
+        difficulty: leetcodeQuestion?.difficulty,
+      }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
@@ -39,7 +44,7 @@ const QuestionForm = ({ title, description }: IProp): ReactElement => {
       </Form.Item>
 
       <Form.Item label="Tags" name="tags">
-        <Select mode="tags" style={{ width: '100%' }} placeholder="tags" bordered={false}>
+        <Select mode="tags" style={{ width: '100%' }}>
           {OPTIONS.map((option, idx) => (
             <Option key={idx} value={option}>
               {option}
@@ -53,7 +58,15 @@ const QuestionForm = ({ title, description }: IProp): ReactElement => {
         name="description"
         rules={[{ required: true, message: 'input description' }]}
       >
-        <Input.TextArea />
+        <Input.TextArea rows={10} />
+      </Form.Item>
+
+      <Form.Item label="Difficulty" name="difficulty">
+        <Select style={{ width: 120 }} bordered={true}>
+          <Option value="Easy">Easy</Option>
+          <Option value="Medium">Medium</Option>
+          <Option value="Hard">Hard</Option>
+        </Select>
       </Form.Item>
 
       <Form.Item {...tailLayout}>

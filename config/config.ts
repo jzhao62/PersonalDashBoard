@@ -48,6 +48,10 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
+
+
+
+
   openAPI: {
     requestLibPath: "import { request } from 'umi'",
     // 或者使用在线的版本
