@@ -1,20 +1,23 @@
 import type { ReactElement } from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Select } from 'antd';
 
-interface IProp {
-  title?: string;
-  description?: string;
-}
+const { Option } = Select;
 
 const layout = {
-  labelCol: { span: 8 },
+  labelCol: { span: 4 },
   wrapperCol: { span: 16 },
 };
 const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
+  wrapperCol: { offset: 4, span: 16 },
 };
 
-const QuestionForm = ({ title, description }: IProp): ReactElement => {
+interface IProp {
+  leetcodeQuestion?: LeetCode.question;
+}
+
+const OPTIONS: string[] = [];
+
+const QuestionForm = ({ leetcodeQuestion = undefined }: IProp): ReactElement => {
   const onFinish = (values: any) => {
     console.log('Success:', values);
   };
@@ -27,24 +30,43 @@ const QuestionForm = ({ title, description }: IProp): ReactElement => {
     <Form
       {...layout}
       name="basic"
-      initialValues={{ title, description }}
+      initialValues={{
+        title: leetcodeQuestion?.title,
+        tags: leetcodeQuestion?.tags,
+        description: leetcodeQuestion?.description,
+        difficulty: leetcodeQuestion?.difficulty,
+      }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      <Form.Item
-        label="title"
-        name="title"
-        rules={[{ required: true, message: 'input title' }]}
-      >
+      <Form.Item label="Title" name="title" rules={[{ required: true, message: 'input title' }]}>
         <Input />
       </Form.Item>
 
+      <Form.Item label="Tags" name="tags">
+        <Select mode="tags" style={{ width: '100%' }}>
+          {OPTIONS.map((option, idx) => (
+            <Option key={idx} value={option}>
+              {option}
+            </Option>
+          ))}
+        </Select>
+      </Form.Item>
+
       <Form.Item
-        label="description"
+        label="Description"
         name="description"
         rules={[{ required: true, message: 'input description' }]}
       >
-        <Input.TextArea />
+        <Input.TextArea rows={10} />
+      </Form.Item>
+
+      <Form.Item label="Difficulty" name="difficulty">
+        <Select style={{ width: 120 }} bordered={true}>
+          <Option value="Easy">Easy</Option>
+          <Option value="Medium">Medium</Option>
+          <Option value="Hard">Hard</Option>
+        </Select>
       </Form.Item>
 
       <Form.Item {...tailLayout}>

@@ -13,7 +13,16 @@ export default defineConfig({
   dva: {
     hmr: true,
   },
-  layout: {
+
+  define: {
+    APP_TYPE: process.env.APP_TYPE || '',
+    'process.env': {
+      API_ENV: process.env.API_ENV,    // 这里是重点吧，获取配置
+    },
+  },
+
+
+    layout: {
     // https://umijs.org/zh-CN/plugins/plugin-layout
     locale: true,
     siderWidth: 208,
@@ -48,6 +57,7 @@ export default defineConfig({
   manifest: {
     basePath: '/',
   },
+
   openAPI: {
     requestLibPath: "import { request } from 'umi'",
     // 或者使用在线的版本

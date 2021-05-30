@@ -6,7 +6,7 @@ inputs:
   # React application. "hook" runs before deployment to build the source code.  "dist" is the built artifact directory which is uploaded.
   src:
     src: ./
-    hook: npm install ; npm run build
-    dist: dist
+    hook: npm install ; npm run build:production
+    dist: build
   # Enable this when you want to set a custom domain.
   # domain: ${env:domain}
