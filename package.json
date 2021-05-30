@@ -6,6 +6,7 @@
   "scripts": {
     "analyze": "cross-env ANALYZE=1 umi build",
     "build": "umi build",
+    "build:production": "cross-env API_ENV=prod umi build",
     "deploy": "npm run site && npm run gh-pages",
     "dev": "npm run start:dev",
     "gh-pages": "gh-pages -d dist",
@@ -22,10 +23,9 @@
     "precommit": "lint-staged",
     "prettier": "prettier -c --write \"src/**/*\"",
     "start": "cross-env UMI_ENV=dev umi dev",
-    "start:dev": "cross-env REACT_APP_ENV=dev MOCK=none UMI_ENV=dev umi dev",
+    "start:dev": "cross-env REACT_APP_ENV=dev API_ENV=dev MOCK=none UMI_ENV=dev umi dev",
     "start:no-mock": "cross-env MOCK=none UMI_ENV=dev umi dev",
     "start:no-ui": "cross-env UMI_UI=none UMI_ENV=dev umi dev",
-    "start:pre": "cross-env REACT_APP_ENV=pre UMI_ENV=dev umi dev",
     "start:test": "cross-env REACT_APP_ENV=test MOCK=none UMI_ENV=dev umi dev",
     "pretest": "node ./tests/beforeTest",
     "tsc": "tsc --noEmit"
