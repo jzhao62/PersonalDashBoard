@@ -51,6 +51,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.35",
     "@fortawesome/free-solid-svg-icons": "^5.15.3",
     "@fortawesome/react-fontawesome": "^0.1.14",
+    "@umijs/hooks": "^1.9.3",
     "@umijs/plugin-openapi": "^1.0.1",
     "@umijs/route-utils": "^1.0.33",
     "antd": "^4.12.0",

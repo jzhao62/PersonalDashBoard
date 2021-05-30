@@ -1,5 +1,7 @@
 import type { ReactElement } from 'react';
 import { Button, Form, Input, Select } from 'antd';
+import { createQuestion } from '@/services/leetcode/leetcode';
+import { useRequest } from '@@/plugin-request/request';
 
 const { Option } = Select;
 
@@ -12,14 +14,28 @@ const tailLayout = {
 };
 
 interface IProp {
-  leetcodeQuestion?: LeetCode.question;
+  leetcodeQuestion?: LeetCode.questionPayload;
 }
 
 const OPTIONS: string[] = [];
 
 const QuestionForm = ({ leetcodeQuestion = undefined }: IProp): ReactElement => {
+  const { data, run } = useRequest(createQuestion, {
+    manual: true,
+    onSuccess: (result, params) => {
+      console.log(data, result, params);
+    },
+  });
+
   const onFinish = (values: any) => {
-    console.log('Success:', values);
+    run({
+      title: values.title,
+      detail: {
+        description: values.description,
+        tags: values.tags,
+        difficulty: values.difficulty,
+      },
+    });
   };
 
   const onFinishFailed = (errorInfo: any) => {
@@ -32,9 +48,9 @@ const QuestionForm = ({ leetcodeQuestion = undefined }: IProp): ReactElement => 
       name="basic"
       initialValues={{
         title: leetcodeQuestion?.title,
-        tags: leetcodeQuestion?.tags,
-        description: leetcodeQuestion?.description,
-        difficulty: leetcodeQuestion?.difficulty,
+        tags: leetcodeQuestion?.detail.tags,
+        description: leetcodeQuestion?.detail.description,
+        difficulty: leetcodeQuestion?.detail.difficulty,
       }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}

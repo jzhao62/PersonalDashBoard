@@ -5,10 +5,16 @@ const ENDPOINT =
     ? 'local'
     : 'https://56xljbuw49.execute-api.us-east-1.amazonaws.com/dev';
 
-
-export async function getAllQuestions() {
-
-  return request<LeetCode.question>(`${ENDPOINT}/items`, {
+export const getAllQuestions = async (): Promise<LeetCode.question[]> => {
+  return request<LeetCode.question[]>(`${ENDPOINT}/items`, {
     method: 'GET',
   });
-}
+};
+
+export const createQuestion = async (payload: LeetCode.questionPayload) => {
+  return request<LeetCode.questionPayload>(`${ENDPOINT}/items`, {
+    method: 'POST',
+    data: payload,
+  });
+};
+
