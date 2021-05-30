@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import { PageContainer } from '@ant-design/pro-layout';
-import { Button, Modal, Space, Table, Tag } from 'antd';
+import { Button, Drawer, Space, Table, Tag } from 'antd';
 import QuestionForm from '@/pages/LeetCode/QuestionForm';
 
 const columns = [
@@ -78,27 +78,28 @@ const data = [
 ];
 
 const LeetCodeList: React.FC = () => {
-  const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isDrawerVisible, setIsDrawerVisible] = useState(false);
 
   return (
     <PageContainer
       content="Already visited leetcode/lintcode"
       extra={[
-        <Button key="1" type="primary" onClick={() => setIsModalVisible(true)}>
+        <Button key="1" type="primary" onClick={() => setIsDrawerVisible(true)}>
           Add a problem
         </Button>,
       ]}
     >
       <Table columns={columns} dataSource={data} />
 
-      <Modal
+      <Drawer
+        width={600}
         title="New Question"
-        visible={isModalVisible}
+        visible={isDrawerVisible}
         footer={null}
-        onCancel={() => setIsModalVisible(false)}
+        onClose={() => setIsDrawerVisible(false)}
       >
         <QuestionForm />
-      </Modal>
+      </Drawer>
     </PageContainer>
   );
 };

@@ -1,18 +1,21 @@
 import type { ReactElement } from 'react';
-import { Button, Form, Input } from 'antd';
+import { Button, Form, Input, Select } from 'antd';
 
+const { Option } = Select;
 interface IProp {
   title?: string;
   description?: string;
 }
 
 const layout = {
-  labelCol: { span: 8 },
+  labelCol: { span: 4 },
   wrapperCol: { span: 16 },
 };
 const tailLayout = {
-  wrapperCol: { offset: 8, span: 16 },
+  wrapperCol: { offset: 4, span: 16 },
 };
+
+const OPTIONS = ['t1', 't2', 't3'];
 
 const QuestionForm = ({ title, description }: IProp): ReactElement => {
   const onFinish = (values: any) => {
@@ -27,20 +30,26 @@ const QuestionForm = ({ title, description }: IProp): ReactElement => {
     <Form
       {...layout}
       name="basic"
-      initialValues={{ title, description }}
+      initialValues={{ title, tags: ['t1', 't2', 't3'], description }}
       onFinish={onFinish}
       onFinishFailed={onFinishFailed}
     >
-      <Form.Item
-        label="title"
-        name="title"
-        rules={[{ required: true, message: 'input title' }]}
-      >
+      <Form.Item label="Title" name="title" rules={[{ required: true, message: 'input title' }]}>
         <Input />
       </Form.Item>
 
+      <Form.Item label="Tags" name="tags">
+        <Select mode="tags" style={{ width: '100%' }} placeholder="tags" bordered={false}>
+          {OPTIONS.map((option, idx) => (
+            <Option key={idx} value={option}>
+              {option}
+            </Option>
+          ))}
+        </Select>
+      </Form.Item>
+
       <Form.Item
-        label="description"
+        label="Description"
         name="description"
         rules={[{ required: true, message: 'input description' }]}
       >
