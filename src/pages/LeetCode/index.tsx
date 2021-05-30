@@ -56,7 +56,7 @@ const columns = [
 const data = [
   {
     key: '1',
-    name: 'Serverless deployed',
+    name: 'Serverless deployed v2',
     age: 32,
     address: 'New York No. 1 Lake Park',
     tags: ['nice', 'developer'],
