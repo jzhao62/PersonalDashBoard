@@ -1,11 +1,25 @@
-
-
 declare namespace LeetCode {
-  type question = {
+  type itemPayload = {
     title: string;
-    description?: string;
-    tags?: string[];
-    difficulty?: 'Easy' | 'Medium' | 'Hard';
-  }
+    detail: {
+      description?: string;
+      tags?: string[];
+      difficulty?: 'Easy' | 'Medium' | 'Hard';
+      url_sources: string[]
+    };
+  };
+
+  type questionItem = {
+    id: string;
+    item_title: string;
+    detail: {
+      description: string;
+      tags: string[];
+      difficulty: 'Easy' | 'Medium' | 'Hard';
+      url_sources: string[]
+    };
+    time_created: string;
+    last_visited: string;
+  };
 
 }
