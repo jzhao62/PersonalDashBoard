@@ -1,4 +1,4 @@
-import { Tag, Input, Tooltip } from 'antd';
+import { Tag, Input, Tooltip, Space } from 'antd';
 import { PlusOutlined } from '@ant-design/icons';
 import type { ReactElement } from 'react';
 import { useRef, useState } from 'react';
@@ -64,46 +64,45 @@ export const EditableTagGroup = ({
   };
 
   return (
-    <>
-      {tags &&
-        tags.map((tag, index) => {
-          if (editInputIndex === index && canModify) {
-            return (
-              <Input
-                ref={saveEditInputRef}
-                key={tag}
-                size="small"
-                value={editInputValue}
-                onChange={handleEditInputChange}
-                onBlur={handleEditInputConfirm}
-                onPressEnter={handleEditInputConfirm}
-              />
-            );
-          }
-          const isLongTag = tag.length > tagLength;
-          const tagElem = (
-            <Tag key={tag} closable={canModify} onClose={() => handleClose(tag)}>
-              <span
-                onDoubleClick={(e) => {
-                  if (index !== 0) {
-                    setEditInputIndex(index);
-                    setEditInputValue(tag);
-                    e.preventDefault();
-                  }
-                }}
-              >
-                {isLongTag ? `${tag.slice(0, 5)}...` : tag}
-              </span>
-            </Tag>
+    <Space wrap>
+      {tags.map((tag, index) => {
+        if (editInputIndex === index && canModify) {
+          return (
+            <Input
+              ref={saveEditInputRef}
+              key={tag}
+              size="small"
+              value={editInputValue}
+              onChange={handleEditInputChange}
+              onBlur={handleEditInputConfirm}
+              onPressEnter={handleEditInputConfirm}
+            />
           );
-          return isLongTag ? (
-            <Tooltip title={tag} key={tag}>
-              {tagElem}
-            </Tooltip>
-          ) : (
-            tagElem
-          );
-        })}
+        }
+        const isLongTag = tag.length > tagLength;
+        const tagElem = (
+          <Tag key={tag} closable={canModify} onClose={() => handleClose(tag)} color={'geekblue'}>
+            <span
+              onDoubleClick={(e) => {
+                if (index !== 0) {
+                  setEditInputIndex(index);
+                  setEditInputValue(tag);
+                  e.preventDefault();
+                }
+              }}
+            >
+              {isLongTag ? `${tag.slice(0, 5)}...` : tag}
+            </span>
+          </Tag>
+        );
+        return isLongTag ? (
+          <Tooltip title={tag} key={tag}>
+            {tagElem}
+          </Tooltip>
+        ) : (
+          tagElem
+        );
+      })}
       {!inputVisible && canModify && (
         <Tag onClick={showInput}>
           <PlusOutlined />
@@ -121,7 +120,7 @@ export const EditableTagGroup = ({
           onPressEnter={handleInputConfirm}
         />
       )}
-    </>
+    </Space>
   );
 };
 
