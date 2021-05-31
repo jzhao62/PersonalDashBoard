@@ -24,3 +24,9 @@ export const editQuestion = async (payload: LeetCode.itemPayload, id?: string) =
     data: payload,
   });
 };
+
+export const deleteQuestion = async (id: string) => {
+  return request(`${ENDPOINT}/items/${id}`, {
+    method: 'DELETE',
+  });
+};

@@ -4,12 +4,11 @@ import { Button, Drawer, message, Table } from 'antd';
 import QuestionForm from '@/pages/LeetCode/components/QuestionForm/QuestionForm';
 import { useRequest } from '@umijs/hooks';
 import { leetCodeTableColumns } from '@/pages/LeetCode/configs /leetcodeTableConfig';
-import { createQuestion, editQuestion, getAllQuestions } from '@/services/leetcode/leetcode';
+import { createQuestion, getAllQuestions } from '@/services/leetcode/leetcode';
 import { ReloadOutlined } from '@ant-design/icons';
 
 const LeetCodeList: React.FC = () => {
   const [isCreatingNewItem, setCreatingNewItem] = useState(false);
-  const [questionModified, setQuestionModified] = useState<LeetCode.questionItem | null>(null);
 
   const { data, loading, run } = useRequest<LeetCode.questionItem[]>(getAllQuestions);
 
@@ -19,15 +18,8 @@ const LeetCodeList: React.FC = () => {
     onError: (result) => message.error(result.message),
   });
 
-  const { run: dispatchEdit } = useRequest(editQuestion, {
-    manual: true,
-    onSuccess: () => setQuestionModified(null),
-    onError: (result) => message.error(result.message),
-  });
-
   return (
     <PageContainer
-      content="Completed leetcode/lintcode"
       extra={[
         <Button key="1" type="primary" onClick={() => setCreatingNewItem(true)}>
           Add a problem
@@ -41,13 +33,6 @@ const LeetCodeList: React.FC = () => {
         columns={leetCodeTableColumns}
         loading={loading}
         dataSource={data}
-        onRow={(record: LeetCode.questionItem) => {
-          return {
-            onClick: () => {
-              setQuestionModified(record);
-            },
-          };
-        }}
       />
 
       <Drawer
@@ -59,22 +44,6 @@ const LeetCodeList: React.FC = () => {
         destroyOnClose={true}
       >
         <QuestionForm onSubmit={(v) => dispatchCreate(v)} />
-      </Drawer>
-
-      <Drawer
-        width={600}
-        title="Editing Existing Question"
-        visible={questionModified !== null}
-        footer={null}
-        onClose={() => setQuestionModified(null)}
-        destroyOnClose={true}
-      >
-        {questionModified && (
-          <QuestionForm
-            leetcodeQuestion={questionModified}
-            onSubmit={(v, id) => dispatchEdit(v, id)}
-          />
-        )}
       </Drawer>
     </PageContainer>
   );
