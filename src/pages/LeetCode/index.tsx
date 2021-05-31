@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { PageContainer } from '@ant-design/pro-layout';
-import { Button, Drawer, Table } from 'antd';
+import { Button, Drawer, message, Table } from 'antd';
 import QuestionForm from '@/pages/LeetCode/components/QuestionForm/QuestionForm';
 import { useRequest } from '@umijs/hooks';
 import { leetCodeTableColumns } from '@/pages/LeetCode/configs /leetcodeTableConfig';
@@ -13,11 +13,17 @@ const LeetCodeList: React.FC = () => {
 
   const { data, loading, run } = useRequest<LeetCode.questionItem[]>(getAllQuestions);
 
-  const { run: dispatchCreate } = useRequest(createQuestion, { manual: true });
+  const { run: dispatchCreate } = useRequest(createQuestion, {
+    manual: true,
+    onSuccess: () => setCreatingNewItem(false),
+    onError: (result) => message.error(result.message),
+  });
 
-  const { run: dispatchEdit } = useRequest(editQuestion, { manual: true });
-
-  console.log(questionModified);
+  const { run: dispatchEdit } = useRequest(editQuestion, {
+    manual: true,
+    onSuccess: () => setQuestionModified(null),
+    onError: (result) => message.error(result.message),
+  });
 
   return (
     <PageContainer

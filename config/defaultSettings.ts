@@ -1,5 +1,4 @@
 import { Settings as LayoutSettings } from '@ant-design/pro-layout';
-
 const Settings: LayoutSettings & {
   pwa?: boolean;
   logo?: string;
@@ -12,9 +11,9 @@ const Settings: LayoutSettings & {
   fixedHeader: false,
   fixSiderbar: true,
   colorWeak: false,
-  title: 'Ant Design Pro',
+  title: 'Personal DashBoard',
   pwa: false,
-  logo: 'https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg',
+  logo: 'https://jingyi-notes-bucket.s3.us-east-2.amazonaws.com/leetcode.svg',
   iconfontUrl: '',
 };
 

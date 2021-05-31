@@ -1,5 +1,5 @@
 import type { ReactElement } from 'react';
-import { Button, Form, Input, message, Select } from 'antd';
+import { Button, Divider, Form, Input, message, Select } from 'antd';
 import EditableTagGroup from '@/components/EditableTagGroup';
 import styles from './index.less';
 
@@ -61,14 +61,6 @@ const QuestionForm = ({ leetcodeQuestion = null, onSubmit }: IProp): ReactElemen
         </Select>
       </Form.Item>
 
-      <Form.Item
-        label="Description"
-        name="description"
-        rules={[{ required: true, message: 'input description' }]}
-      >
-        <Input.TextArea rows={10} className={styles.inputWrapper} />
-      </Form.Item>
-
       <Form.Item label="Difficulty" name="difficulty">
         <Select style={{ width: 120 }} className={styles.inputWrapper}>
           <Option value="Easy">Easy</Option>
@@ -79,6 +71,16 @@ const QuestionForm = ({ leetcodeQuestion = null, onSubmit }: IProp): ReactElemen
 
       <Form.Item label="url_sources" name="url_sources">
         <EditableTagGroup canModify />
+      </Form.Item>
+      <Form.Item>
+        <Divider />
+      </Form.Item>
+      <Form.Item
+        label="Description"
+        name="description"
+        rules={[{ required: true, message: 'input description' }]}
+      >
+        <Input.TextArea rows={10} className={styles.inputWrapper} />
       </Form.Item>
 
       <Form.Item>
