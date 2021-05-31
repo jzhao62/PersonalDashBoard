@@ -16,4 +16,5 @@ const Settings: LayoutSettings & {
   iconfontUrl: '',
 };
 
+
 export default Settings;
