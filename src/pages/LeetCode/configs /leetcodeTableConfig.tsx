@@ -73,7 +73,7 @@ const ActionComponent = ({ questionItem }: IProp): ReactElement => {
                     editable={{
                       icon: <EditFilled />,
                       tooltip: 'click to Edit Description',
-                      onChange: () => console.log('GG'),
+                      onChange: () => console.log('GG22222'),
                     }}
                   >
                     {item.name}
