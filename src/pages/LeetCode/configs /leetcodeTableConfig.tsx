@@ -1,11 +1,27 @@
 import type { ColumnsType } from 'antd/es/table';
 import moment from 'moment';
-import { Button, Divider, Drawer, message, Space } from 'antd';
+import { Button, Divider, Drawer, message, Space, Tabs } from 'antd';
 import type { ReactElement } from 'react';
 import { useRequest } from '@umijs/hooks';
 import { deleteQuestion, editQuestion } from '@/services/leetcode/leetcode';
 import { useState } from 'react';
 import QuestionForm from '@/pages/LeetCode/components/QuestionForm/QuestionForm';
+import { EditFilled, LinkOutlined, ProfileFilled } from '@ant-design/icons';
+import Paragraph from 'antd/es/typography/Paragraph';
+
+
+const { TabPane } = Tabs;
+
+const links = [
+  {
+    name: 'google',
+    link: 'www.google.com',
+  },
+  {
+    name: 'stackoverfllow',
+    link: 'www.stackoverflow.com',
+  },
+];
 
 interface IProp {
   questionItem: LeetCode.questionItem;
@@ -42,7 +58,31 @@ const ActionComponent = ({ questionItem }: IProp): ReactElement => {
         onClose={() => setIsEditing(false)}
         destroyOnClose={true}
       >
-        <QuestionForm leetcodeQuestion={questionItem} onSubmit={(v, id) => dispatchEdit(v, id)} />
+        <Tabs defaultActiveKey="1">
+          <TabPane tab={<ProfileFilled />} key="1">
+            <QuestionForm
+              leetcodeQuestion={questionItem}
+              onSubmit={(v, id) => dispatchEdit(v, id)}
+            />
+          </TabPane>
+          <TabPane tab={<LinkOutlined />} key="2">
+            {links.map((item) => (
+              <div>
+                <Space>
+                  <Paragraph
+                    editable={{
+                      icon: <EditFilled />,
+                      tooltip: 'click to Edit Description',
+                      onChange: () => console.log('GG'),
+                    }}
+                  >
+                    {item.name}
+                  </Paragraph>
+                </Space>
+              </div>
+            ))}
+          </TabPane>
+        </Tabs>
       </Drawer>
     </>
   );
