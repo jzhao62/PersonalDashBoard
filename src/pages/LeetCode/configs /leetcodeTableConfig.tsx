@@ -35,7 +35,7 @@ const ActionComponent = ({ questionItem }: IProp): ReactElement => {
       </Space>
 
       <Drawer
-        width={600}
+        width={700}
         title="Editing Existing Question"
         visible={isEditing}
         footer={null}

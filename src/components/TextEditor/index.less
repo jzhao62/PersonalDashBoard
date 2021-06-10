@@ -1,0 +1,36 @@
+.textEditor {
+  max-width: 40rem;
+  height: inherit;
+  margin: 1rem auto;
+  overflow: hidden;
+  background: #fff;
+
+  :global(.quill) {
+    height: 100%;
+    :global(.ql-toolbar) {
+      box-sizing: border-box;
+      padding: 8px;
+      font-family: 'Helvetica Neue', 'Helvetica', 'Arial', sans-serif;
+      border: 1px solid #ccc;
+      box-shadow: 0px 1px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    :global(.ql-container) {
+      position: relative;
+      box-sizing: border-box;
+      height: inherit;
+      margin: 0;
+      font-size: 13px;
+      font-family: Helvetica, Arial, sans-serif;
+      :global(.ql-editor) {
+        position: relative;
+        box-sizing: border-box;
+        height: 100%;
+        margin: 0;
+        overflow-y: auto;
+        font-size: 13px;
+        font-family: Helvetica, Arial, sans-serif;
+      }
+    }
+  }
+}
