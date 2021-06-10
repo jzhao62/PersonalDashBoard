@@ -36,7 +36,7 @@ const LeetCodeList: React.FC = () => {
       />
 
       <Drawer
-        width={600}
+        width={700}
         title="New Question"
         visible={isCreatingNewItem}
         footer={null}
